@@ -76,9 +76,11 @@ class Request(object):
         url = self.url_transactions
         step = 'export' if type_file == 'csv' else 'list'
         data = {
-            'datefrom': '2015-08-12',  # TODO: заглушка date_start,
-            'dateto': '2015-08-24',  # TODO: заглушка date_finish,
+            'datefrom': date_start,
+            'dateto': date_finish,
             'step': step,
+
+            # TODO: непонятные данные в форме, нужно их проверять
             'accountid': '0',
             'methid': 'All',
             'next':	'0',
