@@ -29,12 +29,25 @@ class Unloading(object):
         self.date_finish = None
         self.__file_iter = None
 
-    def create_unloading(self, date_start, date_finish):
+    def create_unloading(self, date_start, date_finish=None):
+        """
+        Создание выгрузки
+        @param date_start: дата начала, в формате '2015-08-12'
+        @type: str
+
+        @param date_finish: дата окончания. В формате '2015-08-12'
+        @type: str
+
+        @return: итератор по файлу.
+        @rtype: generator
+        """
         obj = Request(self.login, self.password)
         self.file_iter, self.__file_iter = itertools.tee(
             obj.get_file(date_start, date_finish), 2
         )
-        self.date_finish = date_finish
+
+        # если date_finish не определена, делаем ее == date_start
+        self.date_finish = date_finish if date_finish else date_start
         self.date_start = date_start
 
         return self.file_iter
