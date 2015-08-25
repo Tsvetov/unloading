@@ -63,6 +63,9 @@ class Unloading(object):
             return full_name
 
     def generate_name_new_file(self):
-         return 'ipayoptions-{}-{}.csv'.format(
-             self.date_start, self.date_finish
-         )
+        if self.date_finish == self.date_finish:
+            return 'ipayoptions-{}.csv'.format(self.date_start)
+
+        return 'ipayoptions-{}_{}.csv'.format(
+            self.date_start, self.date_finish
+        )
